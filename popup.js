@@ -12,12 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
           results = document.querySelectorAll("input , textarea");
           for (const prop in results) {
             const element = results[prop];
+            
             // if (element.tagName !== "TEXTAREA" && element.tagName !== "INPUT") {
             //   console.log("Hi");
             //   continue;
             // }
             element.addEventListener("blur", (e) => { 
-              const value = e.target.value
+              const value = e.target.value;
               if(value =='') return ;  
               alert(value);
             });
