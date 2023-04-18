@@ -1,39 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
- // Get the current state of the extension from storage
- chrome.storage.sync.get("enabled", function (data) {
-  var enabled = data.enabled;
-
-  // Toggle the state of the extension
-  enabled = !enabled;
-
-  // Store the new state in storage
-  chrome.storage.sync.set({ enabled: enabled }, function () {
-    // Update the text of the toggle button to reflect the new state
-    var toggleButton = document.getElementById("toggleButton");
-    toggleButton.textContent = enabled ? "Deactivate Extension" : "Activate Extension";
-
-    // Deactivate the extension if the toggle button was clicked and the extension is now disabled
-    if (!enabled) {
-      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        chrome.scripting.executeScript(
-          {
-            target: { tabId: tabs[0].id },
-            function: function () {
-              // Remove the blur event listener from all input and textarea elements
-              var results = document.querySelectorAll("input, textarea");
-              for (const prop in results) {
-                const element = results[prop];
-                element.removeEventListener("blur", blurEventListener);
-              }
-            },
-          }
-        );
-      });
-    }
-  });
-});
- 
-
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     if (!tabs[0]) {
       document.getElementById("error").textContent =
