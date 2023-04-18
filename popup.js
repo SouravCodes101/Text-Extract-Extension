@@ -48,21 +48,3 @@ chrome.runtime.onInstalled.addListener(function () {
     ]);
   });
 });
-
-// Add event listener to the toggle button
-document.getElementById("toggleButton").addEventListener("click", function () {
-  // Get the current state of the extension from storage
-  chrome.storage.sync.get("enabled", function (data) {
-    var enabled = data.enabled;
-
-    // Toggle the state of the extension
-    enabled = !enabled;
-
-    // Store the new state in storage
-    chrome.storage.sync.set({ enabled: enabled }, function () {
-      // Update the text of the toggle button to reflect the new state
-      var toggleButton = document.getElementById("toggleButton");
-      toggleButton.textContent = enabled ? "Deactivate Extension" : "Activate Extension";
-    });
-  });
-});
