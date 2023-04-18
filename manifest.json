@@ -1,0 +1,16 @@
+{
+  "name": "Text Extractor",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "description": "This extension extracts text from a textarea field and displays it as a popup",
+  "permissions": ["activeTab", "storage", "tabs", "scripting"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*"],
+      "js": ["popup.js"]
+    }
+  ]
+}
